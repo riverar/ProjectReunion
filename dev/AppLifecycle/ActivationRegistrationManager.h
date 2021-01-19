@@ -15,9 +15,11 @@ namespace winrt::Microsoft::ProjectReunion::implementation
             hstring const& logo);
         static void RegisterForProtocolActivation(hstring const& scheme,
             hstring const& applicationDisplayName, hstring const& logo);
+        static void RegisterForToastActivation(hstring const& displayName);
 
         static void UnregisterForFileTypeActivation(hstring const& fileType);
         static void UnregisterForProtocolActivation(hstring const& scheme);
+        static void UnregisterForToastActivation();
     };
 }
 

@@ -6,14 +6,14 @@
 
 namespace winrt::Microsoft::ProjectReunion::implementation
 {
-    class UriEncodedLaunchExecuteCommand : public winrt::implements<UriEncodedLaunchExecuteCommand,
+    class EncodedLaunchExecuteCommand : public winrt::implements<EncodedLaunchExecuteCommand,
         ExecuteCommandBase>
     {
         IFACEMETHOD(Execute)() noexcept;
     };
 
-    class __declspec(uuid("8B7A213D-BFFC-456F-B4B9-E3C5B5F1097D")) UriEncodedLaunchExecuteCommandFactory
-        : public winrt::implements<UriEncodedLaunchExecuteCommandFactory, IClassFactory>
+    class __declspec(uuid("8B7A213D-BFFC-456F-B4B9-E3C5B5F1097D")) EncodedLaunchExecuteCommandFactory
+        : public winrt::implements<EncodedLaunchExecuteCommandFactory, IClassFactory>
     {
         IFACEMETHODIMP CreateInstance(IUnknown* outer, GUID const& iid, void** result) noexcept final
         {
@@ -24,7 +24,7 @@ namespace winrt::Microsoft::ProjectReunion::implementation
                 return CLASS_E_NOAGGREGATION;
             }
 
-            return make<UriEncodedLaunchExecuteCommand>()->QueryInterface(iid, result);
+            return make<EncodedLaunchExecuteCommand>()->QueryInterface(iid, result);
         }
 
         IFACEMETHODIMP LockServer(BOOL) noexcept final

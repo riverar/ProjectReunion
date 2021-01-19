@@ -79,6 +79,22 @@ int main()
                 SignalPhase(c_testFilePhaseEventName);
                 succeeded = true;
             }
+            else if (argument.compare(L"RegisterToast") == 0)
+            {
+                ActivationRegistrationManager::RegisterForToastActivation(L"TestToast DisplayName");
+
+                // Signal event that file was registered.
+                SignalPhase(c_testToastPhaseEventName);
+                succeeded = true;
+            }
+            else if (argument.compare(L"UnregisterToast") == 0)
+            {
+                ActivationRegistrationManager::UnregisterForToastActivation();
+
+                // Signal event that file was unregistered.
+                SignalPhase(c_testToastPhaseEventName);
+                succeeded = true;
+            }
         }
     }
     else if (kind == ActivationKind::Protocol)
@@ -120,6 +136,12 @@ int main()
 
         // Signal event that file was activated.
         SignalPhase(c_testFilePhaseEventName);
+        succeeded = true;
+    }
+    else if (kind == ActivationKind::ToastNotification)
+    {
+        // Signal event that toast was activated.
+        SignalPhase(c_testToastPhaseEventName);
         succeeded = true;
     }
 

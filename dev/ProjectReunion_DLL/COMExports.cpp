@@ -2,7 +2,7 @@
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 
 #include "pch.h"
-#include "UriEncodedLaunchExecuteCommand.h"
+#include "EncodedLaunchExecuteCommand.h"
 #include "Association.h"
 
 using namespace winrt::Microsoft::ProjectReunion::implementation;
@@ -12,15 +12,15 @@ std::wstring GetCoClassPath(const GUID& iid);
 void RegisterCoClass(const GUID& iid);
 void UnregisterCoClass(const GUID& iid);
 
-HRESULT __stdcall DllGetClassObject(GUID const& clsid, GUID const& iid, void** result)
+extern "C" HRESULT __stdcall DllGetClassObject(GUID const& clsid, GUID const& iid, void** result)
 {
     try
     {
         *result = nullptr;
 
-        if (clsid == __uuidof(UriEncodedLaunchExecuteCommandFactory))
+        if (clsid == __uuidof(EncodedLaunchExecuteCommandFactory))
         {
-            return winrt::make<UriEncodedLaunchExecuteCommandFactory>()->QueryInterface(iid, result);
+            return winrt::make<EncodedLaunchExecuteCommandFactory>()->QueryInterface(iid, result);
         }
 
         return winrt::hresult_class_not_available().to_abi();
@@ -33,24 +33,18 @@ HRESULT __stdcall DllGetClassObject(GUID const& clsid, GUID const& iid, void** r
     return S_OK;
 }
 
-HRESULT __stdcall DllRegisterServer() noexcept try
+extern "C" HRESULT __stdcall DllRegisterServer() noexcept try
 {
-    RegisterCoClass(__uuidof(UriEncodedLaunchExecuteCommandFactory));
-
-    std::wstring scheme = L"ms-launch";
-    RegisterProtocol(scheme);
-
-    auto delegateExecute = __uuidof(UriEncodedLaunchExecuteCommandFactory);
-    RegisterVerb(scheme, L"open", L"", &delegateExecute);
+    RegisterCoClass(__uuidof(EncodedLaunchExecuteCommandFactory));
     return S_OK;
 }
 CATCH_RETURN()
 
-HRESULT __stdcall DllUnregisterServer() noexcept try
+extern "C" HRESULT __stdcall DllUnregisterServer() noexcept try
 {
     std::wstring scheme = L"ms-launch";
     UnregisterProtocol(scheme);
-    UnregisterCoClass(__uuidof(UriEncodedLaunchExecuteCommandFactory));
+    UnregisterCoClass(__uuidof(EncodedLaunchExecuteCommandFactory));
     return S_OK;
 }
 CATCH_RETURN()

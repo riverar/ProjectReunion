@@ -8,6 +8,9 @@
 #include "ProtocolActivatedEventArgs.h"
 #include "FileActivatedEventArgs.h"
 #include "Association.h"
+#include "EncodedLaunchExecuteCommand.h"
+
+extern "C" HRESULT __stdcall DllRegisterServer() noexcept;
 
 namespace winrt::Microsoft::ProjectReunion::implementation
 {
@@ -74,6 +77,29 @@ namespace winrt::Microsoft::ProjectReunion::implementation
         RegisterAssociationHandler(appId, scheme.c_str(), type);
     }
 
+    void ActivationRegistrationManager::RegisterForToastActivation(hstring const& displayName)
+    {
+        if (displayName.empty())
+        {
+            throw hresult_invalid_argument();
+        }
+
+        if (HasIdentity())
+        {
+            throw hresult_illegal_method_call();
+        }
+
+        DllRegisterServer(); // TODO: Remove once we have a better solution for this registration.
+
+        std::wstring scheme = L"ms-launch";
+        RegisterProtocol(scheme);
+
+        auto delegateExecute = __uuidof(EncodedLaunchExecuteCommandFactory);
+        RegisterVerb(scheme, L"open", L"", &delegateExecute);
+
+        // TODO: EnsureRegister the WNS OOP Server callback here. (calls into main package in some way to get the work done?)
+    }
+
     void ActivationRegistrationManager::UnregisterForFileTypeActivation(hstring const& fileType)
     {
         if (HasIdentity())
@@ -105,5 +131,13 @@ namespace winrt::Microsoft::ProjectReunion::implementation
         auto progId = ComputeProgId(appId, type);
         UnregisterAssociationHandler(appId, scheme.c_str(), type);
         UnregisterProgId(progId);
+    }
+
+    void ActivationRegistrationManager::UnregisterForToastActivation()
+    {
+        if (HasIdentity())
+        {
+            throw hresult_illegal_method_call();
+        }
     }
 }

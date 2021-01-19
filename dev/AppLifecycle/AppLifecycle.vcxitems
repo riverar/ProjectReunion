@@ -17,7 +17,7 @@
   <ItemGroup>
     <ClCompile Include="$(MSBuildThisFileDirectory)ActivationRegistrationManager.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Association.cpp" />
-    <ClCompile Include="$(MSBuildThisFileDirectory)UriEncodedLaunchExecuteCommand.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)EncodedLaunchExecuteCommand.cpp" />
     <ClInclude Include="$(MSBuildThisFileDirectory)ActivatedEventArgsBase.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)ActivationRegistrationManager.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Association.h" />
@@ -25,7 +25,7 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)FileActivatedEventArgs.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)LaunchActivatedEventArgs.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)ProtocolActivatedEventArgs.h" />
-    <ClInclude Include="$(MSBuildThisFileDirectory)UriEncodedLaunchExecuteCommand.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)EncodedLaunchExecuteCommand.h" />
     <Midl Include="$(MSBuildThisFileDirectory)AppLifecycle.idl" />
     <ClInclude Include="$(MSBuildThisFileDirectory)AppLifecycle.h" />
     <ClCompile Include="$(MSBuildThisFileDirectory)AppLifecycle.cpp" />
