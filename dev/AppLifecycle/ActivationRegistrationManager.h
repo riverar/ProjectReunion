@@ -15,11 +15,19 @@ namespace winrt::Microsoft::ProjectReunion::implementation
             hstring const& logo);
         static void RegisterForProtocolActivation(hstring const& scheme,
             hstring const& applicationDisplayName, hstring const& logo);
-        static void RegisterForToastActivation(hstring const& displayName);
+        static void RegisterForToastActivation(hstring const& appUserModelId,
+            hstring const& displayName, hstring const& logo);
 
         static void UnregisterForFileTypeActivation(hstring const& fileType);
         static void UnregisterForProtocolActivation(hstring const& scheme);
         static void UnregisterForToastActivation();
+
+    private:
+        static void RegisterForProtocolActivationInternal(hstring const& scheme,
+            hstring const& appUserModelId, hstring const& applicationDisplayName,
+            hstring const& logo);
+        static void RegisterEncodedLaunchCommand();
+        static void RegisterEncodedLaunchSupport(hstring const& appUserModelId);
     };
 }
 

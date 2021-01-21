@@ -81,7 +81,7 @@ int main()
             }
             else if (argument.compare(L"RegisterToast") == 0)
             {
-                ActivationRegistrationManager::RegisterForToastActivation(L"TestToast DisplayName");
+                ActivationRegistrationManager::RegisterForToastActivation(L"ReunionTest.AppUserModelId", L"TestToast DisplayName", L"");
 
                 // Signal event that file was registered.
                 SignalPhase(c_testToastPhaseEventName);

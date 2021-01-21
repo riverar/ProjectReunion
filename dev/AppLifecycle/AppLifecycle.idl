@@ -13,7 +13,7 @@ namespace Microsoft.ProjectReunion
         static void RegisterForFileTypeActivation(String[] supportedFileTypes, String[] supportedVerbs,
             String applicationDisplayName, String logo);
         static void RegisterForProtocolActivation(String scheme, String applicationDisplayName, String logo);
-        static void RegisterForToastActivation(String displayName);
+        static void RegisterForToastActivation(String appUserModelId, String displayName, String logo);
 
         static void UnregisterForFileTypeActivation(String fileType);
         static void UnregisterForProtocolActivation(String scheme);

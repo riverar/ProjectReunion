@@ -217,7 +217,8 @@ namespace ProjectReunionCppTest
             WaitForEvent(event, m_failed);
 
             // Launch a protocol and wait for the event to fire.
-            Uri launchUri{ L"ms-launch://this_is_a_test" };
+            //Uri launchUri{ L"ms-launch://PRFeaf8729f68a6633f.Protocol" };
+            Uri launchUri{ L"ms-launch://ReunionTest.AppUserModelId" };
             auto launchResult = Launcher::LaunchUriAsync(launchUri).get();
             VERIFY_IS_TRUE(launchResult);
 
@@ -226,8 +227,11 @@ namespace ProjectReunionCppTest
 
             Execute(L"AppLifecycleTestApp.exe", L"/UnregisterToast", g_deploymentDir);
 
+            // TODO: Undo this hack once we deserialize args.
+            auto protEvent = CreateTestEvent(c_testProtocolPhaseEventName);
+
             // Wait for the unregister event.
-            WaitForEvent(event, m_failed);
+            WaitForEvent(protEvent, m_failed);
         }
     };
 }
